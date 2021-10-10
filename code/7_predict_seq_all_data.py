@@ -14,6 +14,22 @@ def compute_edit_distance(arr, v):
     edit_distance_index = np.argmin(edit_distances)
     return edit_distance_index, edit_distances[edit_distance_index]
 
+def compute_wrong_kps(seq_orig, seq_predict, edit_dist):
+    wrong_kp_col = []
+    for i in range(len(seq_orig)):
+        val = ""
+        if edit_dist[i] == 0:
+            val = "NIL,"
+        else:
+            for j in range(len(seq_orig[i])):
+                if float(seq_orig[i][j]) == seq_predict[i][j]:
+                    val += seq_orig[i][j] + ","
+                else:
+                    val += str(int(seq_predict[i][j])) + "*(" + seq_orig[i][j] + "),"
+        wrong_kp_col.append(val[:-1])
+    return wrong_kp_col
+
+
 mettu_dir = 'D:/College/BTech Project/DataSet/kp/mettu/'
 annotation_file = 'D:/College/BTech Project/DataSet/AnnotationFiles/Kuditta_Mettu'
 mettu_data = 'D:/College/BTech Project/DataSet/images/Background_sub_images/mettu/'
@@ -69,6 +85,7 @@ for m in range(1,5):
         y_predict.append(seq_index + 1)
         edit_dist.append(edit_distance)
 
+wrong_kp_col = compute_wrong_kps(seq_orig, seq_predict, edit_dist)
 Path('../output/all_data').mkdir(parents=True,exist_ok=True)
 
 print("Accuracy - " + str(accuracy_score(y_orig, y_predict)))
@@ -82,5 +99,5 @@ df_orig.to_csv('../output/all_data/sequence_original_all_data.csv', index=False,
 df_predict = pd.DataFrame(seq_predict)
 df_predict.to_csv('../output/all_data/sequence_predicted_all_data.csv', index=False, header=False)
 
-df_ed = pd.DataFrame(list(zip(y_orig, y_predict, edit_dist)), columns =['Sequence_Original', 'Sequence_Predicted', 'Edit_Distance'])
+df_ed = pd.DataFrame(list(zip(y_orig, y_predict, edit_dist, wrong_kp_col)), columns =['Sequence_Original', 'Sequence_Predicted', 'Edit_Distance', 'Mark the wrong KPs that detected in the sequenece during the prediction. Within () the correct KP is given'])
 df_ed.to_csv('../output/all_data/sequence_edit_distance_all_data.csv',index=False)

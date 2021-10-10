@@ -17,8 +17,7 @@ def miss_predicted_class(y_true, conf_matrix):
             
         miss_predicted_col.append(m)
     return miss_predicted_col
-                
-    
+                   
 
 mettu_dir = 'D:/College/BTech Project/DataSet/kp/mettu/'
 clf = load('../output/model.joblib')

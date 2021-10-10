@@ -19,11 +19,11 @@ def miss_predicted_class(y_true, conf_matrix):
     return miss_predicted_col
                    
 
-mettu_dir = 'D:/College/BTech Project/DataSet/kp/all_data/'
+all_data_dir = 'D:/College/BTech Project/DataSet/kp/all_data/'
 clf = load('../output/model.joblib')
 
-X_test = pd.read_csv(mettu_dir + 'X_test.csv', dtype=np.float, header=None).values
-y_test = pd.read_csv(mettu_dir + 'y_test.csv', dtype=np.float, header=None).values
+X_test = pd.read_csv(all_data_dir + 'X_test.csv', dtype=np.float, header=None).values
+y_test = pd.read_csv(all_data_dir + 'y_test.csv', dtype=np.float, header=None).values
 y_test = list(itertools.chain(*y_test))
 
 y_predict = clf.predict(X_test)
@@ -33,7 +33,7 @@ conf_matrix = confusion_matrix(y_test, y_predict)
 df = pd.DataFrame(conf_matrix)
 df.to_csv('../output/kp_confusion_matrix.csv', index=False, header=False)
 
-y_train = pd.read_csv(mettu_dir + 'y_train.csv', dtype=np.float, header=None).values
+y_train = pd.read_csv(all_data_dir + 'y_train.csv', dtype=np.float, header=None).values
 
 train_cols = np.unique(y_train, return_counts=True)
 train_col = pd.DataFrame(list(zip(train_cols[0], train_cols[1])), columns=['class', 'count_sample'])

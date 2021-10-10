@@ -30,7 +30,7 @@ def compute_wrong_kps(seq_orig, seq_predict, edit_dist):
     return wrong_kp_col
 
 
-mettu_dir = 'D:/College/BTech Project/DataSet/kp/all_data/'
+all_data_dir = 'D:/College/BTech Project/DataSet/kp/all_data/'
 annotation_file = 'D:/College/BTech Project/DataSet/AnnotationFiles/Kuditta_Mettu'
 mettu_data = 'D:/College/BTech Project/DataSet/images/Background_sub_images/mettu/'
 
@@ -46,10 +46,10 @@ y_predict = []
 edit_dist = []
 seq_orig = []
 seq_predict = []
-X_train = pd.read_csv(mettu_dir + 'X_train.csv', dtype=np.float, header=None)
-y_train = pd.read_csv(mettu_dir + 'y_train.csv', dtype=np.float, header=None)
-X_test = pd.read_csv(mettu_dir + 'X_test.csv', dtype=np.float, header=None)
-y_test = pd.read_csv(mettu_dir + 'y_test.csv', dtype=np.float, header=None)
+X_train = pd.read_csv(all_data_dir + 'X_train.csv', dtype=np.float, header=None)
+y_train = pd.read_csv(all_data_dir + 'y_train.csv', dtype=np.float, header=None)
+X_test = pd.read_csv(all_data_dir + 'X_test.csv', dtype=np.float, header=None)
+y_test = pd.read_csv(all_data_dir + 'y_test.csv', dtype=np.float, header=None)
 
 X_all_data = X_train.append(X_test, ignore_index=True)
 y_all_data = y_train.append(y_test, ignore_index=True)

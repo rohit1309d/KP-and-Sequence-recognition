@@ -6,12 +6,12 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from joblib import dump
 
-mettu_dir = 'D:/College/BTech Project/DataSet/kp/all_data/'
+all_data_dir = 'D:/College/BTech Project/DataSet/kp/all_data/'
 
-X_train = pd.read_csv(mettu_dir + 'X_train.csv', dtype=np.float, header=None).values
-y_train = pd.read_csv(mettu_dir + 'y_train.csv', dtype=np.float, header=None).values
-X_test = pd.read_csv(mettu_dir + 'X_test.csv', dtype=np.float, header=None).values
-y_test = pd.read_csv(mettu_dir + 'y_test.csv', dtype=np.float, header=None).values
+X_train = pd.read_csv(all_data_dir + 'X_train.csv', dtype=np.float, header=None).values
+y_train = pd.read_csv(all_data_dir + 'y_train.csv', dtype=np.float, header=None).values
+X_test = pd.read_csv(all_data_dir + 'X_test.csv', dtype=np.float, header=None).values
+y_test = pd.read_csv(all_data_dir + 'y_test.csv', dtype=np.float, header=None).values
 
 y_train = list(itertools.chain(*y_train))
 y_test = list(itertools.chain(*y_test))

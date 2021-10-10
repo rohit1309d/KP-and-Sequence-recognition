@@ -12,9 +12,9 @@ def extractHogFeatures(imgPath):
     return hog_features
 
 
-mettu_dir = 'D:/College/BTech Project/DataSet/kp/all_data/'
+all_data_dir = 'D:/College/BTech Project/DataSet/kp/all_data/'
 
-train_dir = mettu_dir + 'train/'
+train_dir = all_data_dir + 'train/'
 X_train = []
 y_train = []
 for cls in os.listdir(train_dir):
@@ -24,7 +24,7 @@ for cls in os.listdir(train_dir):
             X_train.append(hogFeatures)
             y_train.append(cls)
 
-test_dir = mettu_dir + 'test/'
+test_dir = all_data_dir + 'test/'
 X_test = []
 y_test = []
 for cls in os.listdir(test_dir):
@@ -39,8 +39,8 @@ X_test = pd.DataFrame(X_test)
 y_train = pd.DataFrame(y_train)
 y_test = pd.DataFrame(y_test)
 
-X_train.to_csv(mettu_dir+'X_train.csv', index=False, header=False)
-y_train.to_csv(mettu_dir+'y_train.csv', index=False, header=False)
+X_train.to_csv(all_data_dir+'X_train.csv', index=False, header=False)
+y_train.to_csv(all_data_dir+'y_train.csv', index=False, header=False)
 
-X_test.to_csv(mettu_dir+'X_test.csv', index=False, header=False)
-y_test.to_csv(mettu_dir+'y_test.csv', index=False, header=False)
+X_test.to_csv(all_data_dir+'X_test.csv', index=False, header=False)
+y_test.to_csv(all_data_dir+'y_test.csv', index=False, header=False)

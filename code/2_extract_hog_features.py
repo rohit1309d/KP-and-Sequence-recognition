@@ -12,39 +12,35 @@ def extractHogFeatures(imgPath):
     return hog_features
 
 
-mettu_dir = 'D:/College/BTech Project/DataSet/kp/mettu/'
+mettu_dir = 'D:/College/BTech Project/DataSet/kp/all_data/'
 
-for filename in os.listdir(mettu_dir):
-    if os.path.isdir(mettu_dir + filename):
-        train_dir = mettu_dir + filename + '/d1/train/'
-        X_train = []
-        y_train = []
-        for cls in os.listdir(train_dir):
-            if os.path.isdir(train_dir + cls):
-                for img in os.listdir(train_dir + cls):
-                    hogFeatures = extractHogFeatures(train_dir + cls + '/' + img)
-                    X_train.append(hogFeatures)
-                    y_train.append(cls)
-        
-        test_dir = mettu_dir + filename + '/d1/test/'
-        X_test = []
-        y_test = []
-        for cls in os.listdir(test_dir):
-            if os.path.isdir(test_dir + cls):
-                for img in os.listdir(test_dir + cls):
-                    hogFeatures = extractHogFeatures(test_dir + cls + '/' + img)
-                    X_test.append(hogFeatures)
-                    y_test.append(cls)
+train_dir = mettu_dir + 'train/'
+X_train = []
+y_train = []
+for cls in os.listdir(train_dir):
+    if os.path.isdir(train_dir + cls):
+        for img in os.listdir(train_dir + cls):
+            hogFeatures = extractHogFeatures(train_dir + cls + '/' + img)
+            X_train.append(hogFeatures)
+            y_train.append(cls)
 
-        X_train = pd.DataFrame(X_train)
-        X_test = pd.DataFrame(X_test)
-        y_train = pd.DataFrame(y_train)
-        y_test = pd.DataFrame(y_test)
+test_dir = mettu_dir + 'test/'
+X_test = []
+y_test = []
+for cls in os.listdir(test_dir):
+    if os.path.isdir(test_dir + cls):
+        for img in os.listdir(test_dir + cls):
+            hogFeatures = extractHogFeatures(test_dir + cls + '/' + img)
+            X_test.append(hogFeatures)
+            y_test.append(cls)
 
-        X_train.to_csv(train_dir+'train.csv', index=False, header=False)
-        y_train.to_csv(train_dir+'train_label.csv', index=False, header=False)
+X_train = pd.DataFrame(X_train)
+X_test = pd.DataFrame(X_test)
+y_train = pd.DataFrame(y_train)
+y_test = pd.DataFrame(y_test)
 
-        X_test.to_csv(test_dir+'test.csv', index=False, header=False)
-        y_test.to_csv(test_dir+'test_label.csv', index=False, header=False)
+X_train.to_csv(mettu_dir+'X_train.csv', index=False, header=False)
+y_train.to_csv(mettu_dir+'y_train.csv', index=False, header=False)
 
-        print("Mettu " + filename + " d1 done")
+X_test.to_csv(mettu_dir+'X_test.csv', index=False, header=False)
+y_test.to_csv(mettu_dir+'y_test.csv', index=False, header=False)

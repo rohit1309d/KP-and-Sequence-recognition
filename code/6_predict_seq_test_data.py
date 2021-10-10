@@ -20,19 +20,10 @@ mettu_data = 'D:/College/BTech Project/DataSet/images/Background_sub_images/mett
 
 clf = load('../output/model.joblib')
 
-mettu = []
-
-for filename in os.listdir(mettu_data):
-    
-    annotation = pd.DataFrame
-    if int(filename) < 4:
-        annotation = pd.read_excel(annotation_file + '/Kuditta_Mettu_' + filename + '/mettu_' + filename + '_D1_S1.xlsx', engine='openpyxl', header=None, usecols='A:C', nrows=16)
-        classes = [item.split('P')[-1] for item in annotation[0].values]
-        mettu.append(classes+classes)
-    else:
-        annotation = pd.read_excel(annotation_file + '/Kuditta_Mettu_' + filename + '/mettu_' + filename + '_D1_S1.xlsx', engine='openpyxl', header=None, usecols='A:C', nrows=32)
-        classes = [item.split('P')[-1] for item in annotation[0].values]
-        mettu.append(classes)
+mettu = [['94', '3', '95', '3', '96', '97', '95', '3', '98', '99', '95', '3', '96', '97', '95', '3', '94', '3', '95', '3', '96', '97', '95', '3', '98', '99', '95', '3', '96', '97', '95', '3'], 
+['101', '102', '103', '100', '101', '102', '103', '100', '101', '102', '103', '100', '101', '102', '103', '100', '101', '102', '103', '100', '101', '102', '103', '100', '101', '102', '103', '100', '101', '102', '103', '100'], 
+['104', '105', '46', '42', '104', '105', '46', '42', '106', '107', '48', '43', '106', '107', '48', '43', '104', '105', '46', '42', '104', '105', '46', '42', '106', '107', '48', '43', '106', '107', '48', '43'], 
+['108', '66', '103', '100', '109', '68', '103', '100', '110', '111', '112', '60', '113', '114', '115', '116', '109', '68', '103', '100', '108', '66', '103', '100', '113', '114', '115', '116', '110', '111', '112', '60']]
 
 y_orig = []
 y_predict = []

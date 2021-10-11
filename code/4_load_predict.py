@@ -1,3 +1,4 @@
+import time
 from joblib import load
 import itertools
 import numpy as np
@@ -17,13 +18,17 @@ def miss_predicted_class(y_true, conf_matrix):
             
         miss_predicted_col.append(m)
     return miss_predicted_col
-                   
 
+
+begin = time.time()
 all_data_dir = 'D:/College/BTech Project/DataSet/kp/all_data/'
 clf = load('../output/model.joblib')
+print("Model loaded")
 
 X_test = pd.read_csv(all_data_dir + 'X_test.csv', dtype=np.float, header=None).values
+print("X_test reading done")
 y_test = pd.read_csv(all_data_dir + 'y_test.csv', dtype=np.float, header=None).values
+print("y_test reading done")
 y_test = list(itertools.chain(*y_test))
 
 y_predict = clf.predict(X_test)
@@ -32,8 +37,10 @@ print("Accuracy - " + str(accuracy_score(y_test, y_predict)))
 conf_matrix = confusion_matrix(y_test, y_predict)
 df = pd.DataFrame(conf_matrix)
 df.to_csv('../output/kp_confusion_matrix.csv', index=False, header=False)
+print("Confusion matrix saved")
 
 y_train = pd.read_csv(all_data_dir + 'y_train.csv', dtype=np.float, header=None).values
+print("y_train reading done")
 
 train_cols = np.unique(y_train, return_counts=True)
 train_col = pd.DataFrame(list(zip(train_cols[0], train_cols[1])), columns=['class', 'count_sample'])
@@ -52,3 +59,7 @@ miss_predict_col = miss_predicted_class(y_train, conf_matrix)
 final_result = count_tt.assign(miss_predicted_with = miss_predict_col)
 
 final_result.to_csv('../output/kp_test_analysis.csv', index=False)
+print("kp_test_analysis saved")
+
+end = time.time()
+print(f"Total runtime of the program is {end - begin}")

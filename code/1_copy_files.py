@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
 import shutil
-from sklearn.model_selection import train_test_split
 import pandas as pd
 
 root_dir = 'D:/College/BTech Project/DataSet/'
